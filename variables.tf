@@ -19,6 +19,6 @@ variable "apim_publisher_email" {
 }
 
 variable "jwt_secret" {
-  default   = "dataorch-new-jwt-secret-2026"
-  sensitive = true
+  description = "JWT signing secret for the Function App"
+  sensitive   = true
 }
