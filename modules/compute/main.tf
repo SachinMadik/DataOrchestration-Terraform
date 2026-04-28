@@ -29,8 +29,8 @@ resource "azurerm_function_app_flex_consumption" "funcapp" {
     DOC_INTELLIGENCE_ENDPOINT             = var.doc_intelligence_endpoint
     DOC_INTELLIGENCE_KEY                  = var.doc_intelligence_key
     JWT_SECRET                      = var.jwt_secret
-    AZURE_SEARCH_ENDPOINT                 = "https://not-used.search.windows.net"
-    AZURE_SEARCH_KEY                      = "not-used"
+    AZURE_SEARCH_ENDPOINT                 = var.search_endpoint
+    AZURE_SEARCH_KEY                      = var.search_key
   }
 
   site_config {

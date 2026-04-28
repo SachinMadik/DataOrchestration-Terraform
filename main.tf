@@ -40,6 +40,14 @@ module "ai_services" {
   doc_intelligence_name = local.names.doc_intelligence
 }
 
+# ── 5b. Azure AI Search ───────────────────────────────────────────────────────
+module "search" {
+  source              = "./modules/search"
+  resource_group_name = module.resource_group.name
+  location            = module.resource_group.location
+  search_service_name = local.names.search
+}
+
 # ── 6. Key Vault (receives secrets from storage + ai) ─────────────────────────
 module "keyvault" {
   source                    = "./modules/keyvault"
@@ -69,6 +77,8 @@ module "compute" {
   doc_intelligence_endpoint      = module.ai_services.doc_intelligence_endpoint
   doc_intelligence_key           = module.ai_services.doc_intelligence_key
   jwt_secret                     = var.jwt_secret
+  search_endpoint                = module.search.endpoint
+  search_key                     = module.search.primary_key
 }
 
 # ── 8. API Management (depends on compute) ────────────────────────────────────

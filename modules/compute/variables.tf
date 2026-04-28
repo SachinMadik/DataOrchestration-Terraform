@@ -11,3 +11,5 @@ variable "openai_api_key" { sensitive = true }
 variable "doc_intelligence_endpoint" {}
 variable "doc_intelligence_key" { sensitive = true }
 variable "jwt_secret" { sensitive = true }
+variable "search_endpoint" {}
+variable "search_key" { sensitive = true }

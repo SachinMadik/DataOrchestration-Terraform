@@ -16,5 +16,6 @@ locals {
     apim              = "${local.prefix}-apim"
     vnet              = "${local.prefix}-vnet"
     nsg               = "${local.prefix}-nsg"
+    search            = "${local.prefix}-search"
   }
 }
