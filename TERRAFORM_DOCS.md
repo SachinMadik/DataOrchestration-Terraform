@@ -31,6 +31,7 @@ Terraform-DataOrch/
     ├── networking/       # VNet + Subnet + NSG
     ├── keyvault/         # Key Vault + Secrets
     ├── ai-services/      # OpenAI + Doc Intelligence + Model Deployments
+    ├── search/           # Azure AI Search (free tier)
     ├── compute/          # Flex-Consumption Plan + Function App
     ├── api-management/   # APIM + API + Operations + CORS Policy
     └── frontend/         # Static Web App
@@ -144,6 +145,14 @@ frontend          ← Static Web App (independent, but logically last)
 
 ---
 
+### `search`
+**Creates:** `azurerm_search_service` (SKU: **free**)  
+**Inputs:** `resource_group_name`, `location`, `search_service_name`  
+**Outputs:** `endpoint` (`https://<name>.search.windows.net`), `primary_key`  
+**Why:** Azure AI Search powers the vector + hybrid RAG pipeline. Free tier (1 index, 50MB storage) is sufficient for demo. Endpoint and key are passed directly to the `compute` module as `AZURE_SEARCH_ENDPOINT` and `AZURE_SEARCH_KEY`.
+
+---
+
 ### `compute`
 **Creates:** `azurerm_service_plan` (FC1 Flex Consumption), `azurerm_linux_function_app` (Python 3.10)  
 **Inputs:** All secrets and endpoints from storage, monitoring, ai-services modules  
@@ -157,8 +166,12 @@ frontend          ← Static Web App (independent, but logically last)
 | `AZURE_STORAGE_CONNECTION_STRING` | `module.storage.primary_connection_string` |
 | `AZURE_OPENAI_ENDPOINT` | `module.ai_services.openai_endpoint` |
 | `AZURE_OPENAI_API_KEY` | `module.ai_services.openai_api_key` |
+| `AZURE_OPENAI_DEPLOYMENT_NAME` | `"gpt-4.1-mini"` (hardcoded) |
+| `AZURE_OPENAI_EMBEDDING_DEPLOYMENT` | `"text-embedding-3-small"` (hardcoded) |
 | `DOC_INTELLIGENCE_ENDPOINT` | `module.ai_services.doc_intelligence_endpoint` |
 | `DOC_INTELLIGENCE_KEY` | `module.ai_services.doc_intelligence_key` |
+| `AZURE_SEARCH_ENDPOINT` | `module.search.endpoint` |
+| `AZURE_SEARCH_KEY` | `module.search.primary_key` |
 | `APPLICATIONINSIGHTS_CONNECTION_STRING` | `module.monitoring.app_insights_connection_string` |
 | `JWT_SECRET` | `var.jwt_secret` |
 
