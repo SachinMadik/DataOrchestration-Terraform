@@ -47,6 +47,7 @@ module "keyvault" {
   location                  = module.resource_group.location
   key_vault_name            = local.names.key_vault
   tenant_id                 = data.azurerm_client_config.current.tenant_id
+  deployer_object_id        = data.azurerm_client_config.current.object_id
   storage_connection_string = module.storage.primary_connection_string
   openai_api_key            = module.ai_services.openai_api_key
   doc_intelligence_key      = module.ai_services.doc_intelligence_key
@@ -59,7 +60,7 @@ module "compute" {
   location                       = module.resource_group.location
   asp_name                       = local.names.asp
   function_app_name              = local.names.function_app
-  storage_account_name           = module.storage.storage_account_name
+  storage_container_endpoint     = module.storage.deployments_container_endpoint
   storage_account_access_key     = module.storage.primary_access_key
   storage_connection_string      = module.storage.primary_connection_string
   app_insights_connection_string = module.monitoring.app_insights_connection_string

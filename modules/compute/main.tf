@@ -6,20 +6,21 @@ resource "azurerm_service_plan" "asp" {
   sku_name            = "FC1"
 }
 
-resource "azurerm_linux_function_app" "funcapp" {
-  name                       = var.function_app_name
-  resource_group_name        = var.resource_group_name
-  location                   = var.location
-  storage_account_name       = var.storage_account_name
-  storage_account_access_key = var.storage_account_access_key
-  service_plan_id            = azurerm_service_plan.asp.id
+resource "azurerm_function_app_flex_consumption" "funcapp" {
+  name                = var.function_app_name
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  service_plan_id     = azurerm_service_plan.asp.id
 
-  site_config {
-    application_insights_connection_string = var.app_insights_connection_string
-    application_stack {
-      python_version = "3.10"
-    }
-  }
+  runtime_name    = "python"
+  runtime_version = "3.10"
+
+  instance_memory_in_mb = 2048
+
+  storage_container_type     = "blobContainer"
+  storage_container_endpoint = var.storage_container_endpoint
+  storage_authentication_type = "StorageAccountConnectionString"
+  storage_access_key         = var.storage_account_access_key
 
   app_settings = {
     AZURE_STORAGE_CONNECTION_STRING       = var.storage_connection_string
@@ -31,10 +32,9 @@ resource "azurerm_linux_function_app" "funcapp" {
     JWT_SECRET                            = var.jwt_secret
     AZURE_SEARCH_ENDPOINT                 = "https://not-used.search.windows.net"
     AZURE_SEARCH_KEY                      = "not-used"
-    WEBSITE_RUN_FROM_PACKAGE              = "1"
   }
 
-  lifecycle {
-    ignore_changes = [app_settings["WEBSITE_RUN_FROM_PACKAGE"]]
+  site_config {
+    application_insights_connection_string = var.app_insights_connection_string
   }
 }

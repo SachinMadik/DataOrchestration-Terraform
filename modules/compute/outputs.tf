@@ -1,2 +1,2 @@
-output "function_app_hostname" { value = azurerm_linux_function_app.funcapp.default_hostname }
-output "function_app_id"       { value = azurerm_linux_function_app.funcapp.id }
+output "function_app_hostname" { value = azurerm_function_app_flex_consumption.funcapp.default_hostname }
+output "function_app_id" { value = azurerm_function_app_flex_consumption.funcapp.id }
