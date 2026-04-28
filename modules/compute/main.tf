@@ -28,8 +28,7 @@ resource "azurerm_function_app_flex_consumption" "funcapp" {
     AZURE_OPENAI_API_KEY                  = var.openai_api_key
     DOC_INTELLIGENCE_ENDPOINT             = var.doc_intelligence_endpoint
     DOC_INTELLIGENCE_KEY                  = var.doc_intelligence_key
-    APPLICATIONINSIGHTS_CONNECTION_STRING = var.app_insights_connection_string
-    JWT_SECRET                            = var.jwt_secret
+    JWT_SECRET                      = var.jwt_secret
     AZURE_SEARCH_ENDPOINT                 = "https://not-used.search.windows.net"
     AZURE_SEARCH_KEY                      = "not-used"
   }
