@@ -31,6 +31,9 @@ resource "azurerm_function_app_flex_consumption" "funcapp" {
     JWT_SECRET                      = var.jwt_secret
     AZURE_SEARCH_ENDPOINT                 = var.search_endpoint
     AZURE_SEARCH_KEY                      = var.search_key
+    AZURE_OPENAI_DEPLOYMENT_NAME          = "gpt-4.1-mini"
+    AZURE_OPENAI_EMBEDDING_DEPLOYMENT     = "text-embedding-3-small"
+    AZURE_OPENAI_API_VERSION              = "2025-01-01-preview"
   }
 
   site_config {
