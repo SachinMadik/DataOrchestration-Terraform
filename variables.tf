@@ -22,3 +22,9 @@ variable "jwt_secret" {
   description = "JWT signing secret for the Function App"
   sensitive   = true
 }
+
+variable "apim_subscription_key" {
+  description = "APIM master subscription key for frontend env vars"
+  sensitive   = true
+  default     = "773120eef7e64fdfa91ce84c865da6f0"
+}

@@ -94,8 +94,10 @@ module "api_management" {
 
 # ── 9. Frontend (depends on apim) ─────────────────────────────────────────────
 module "frontend" {
-  source              = "./modules/frontend"
-  resource_group_name = module.resource_group.name
-  location            = var.location_eastus2
-  static_web_app_name = local.names.static_web_app
+  source                = "./modules/frontend"
+  resource_group_name   = module.resource_group.name
+  location              = var.location_eastus2
+  static_web_app_name   = local.names.static_web_app
+  apim_gateway_url      = "${module.api_management.gateway_url}/api"
+  apim_subscription_key = var.apim_subscription_key
 }

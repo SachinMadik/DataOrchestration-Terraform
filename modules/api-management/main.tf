@@ -59,7 +59,10 @@ resource "azurerm_api_management_api_policy" "cors" {
   <inbound>
     <cors allow-credentials="false">
       <allowed-origins>
-        <origin>*</origin>
+        <origin>https://icy-island-094f9fb0f.7.azurestaticapps.net</origin>
+        <origin>http://localhost:5173</origin>
+        <origin>http://localhost:3000</origin>
+        <origin>http://localhost:3001</origin>
       </allowed-origins>
       <allowed-methods preflight-result-max-age="300">
         <method>GET</method>

@@ -1,9 +1,10 @@
 resource "azurerm_cognitive_account" "openai" {
-  name                = var.openai_name
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  kind                = "OpenAI"
-  sku_name            = "S0"
+  name                  = var.openai_name
+  resource_group_name   = var.resource_group_name
+  location              = var.location
+  kind                  = "OpenAI"
+  sku_name              = "S0"
+  custom_subdomain_name = var.openai_name
 }
 
 resource "azurerm_cognitive_deployment" "embedding" {

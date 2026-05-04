@@ -4,4 +4,9 @@ resource "azurerm_static_web_app" "frontend" {
   location            = var.location
   sku_tier            = "Free"
   sku_size            = "Free"
+
+  app_settings = {
+    VITE_AZURE_API_URL         = var.apim_gateway_url
+    VITE_APIM_SUBSCRIPTION_KEY = var.apim_subscription_key
+  }
 }
